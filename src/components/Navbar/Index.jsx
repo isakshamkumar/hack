@@ -12,14 +12,15 @@ import {
 import { IconButton, Typography } from "@mui/material";
 import { Drawer, Stack, Box } from "@mui/material";
 import "../../index.css";
+import { useLocation } from "react-router-dom";
 const Index = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
-
+  const params = useLocation();
+  console.log(params);
   const toggleDrawer = (open) => {
     setIsDrawerOpen(open);
   };
-  const params = URLSearchParams;
   return (
     <>
       <SideDrawer
@@ -30,10 +31,19 @@ const Index = () => {
         display={"flex"}
         flexDirection={"column"}
         alignItems={"flex-start"}
-        gap={"32px"}
-        marginLeft={"15px"}
+        paddingLeft={"15px"}
+        width={"auto"}
+        paddingBottom={"15px"}
+        sx={{
+          backgroundColor: "#FFEDFC",
+        }}
       >
-        <Box display={"flex"} gap={"20px"} alignItems={"center"}>
+        <Box
+          display={"flex"}
+          gap={"20px"}
+          alignItems={"center"}
+          marginTop={"15px"}
+        >
           <IconButton
             size="large"
             aria-haspopup="true"
@@ -47,61 +57,134 @@ const Index = () => {
             Physio-Fit
           </Typography>
         </Box>
+      </Box>
+      <Box
+        display={"flex"}
+        flexDirection={"column"}
+        gap={"32px"}
+        width={"fit-content"}
+        alignItems={"flex-start"}
+        paddingX={"15px"}
+        height={"90vh"}
+        sx={{
+          backgroundColor: "#FFEDFC",
+        }}
+      >
         <IconButton
           size="large"
           aria-haspopup="true"
           onClick={() => toggleDrawer(true)}
           color="inherit"
-          sx={{ display: { xs: "flex", lg: "flex" } }}
+          sx={{
+            display: { xs: "flex", lg: "flex" },
+            backgroundColor: params.pathname === "/" ? "#CAA0C3" : "#FFEDFC",
+          }}
         >
-          <Home height={54} width={54} fill={"blue"} />
+          <Home
+            height={54}
+            width={54}
+            sx={{
+              color: params.pathname === "/" ? "white" : "black",
+            }}
+          />
         </IconButton>
         <IconButton
           size="large"
           aria-haspopup="true"
           onClick={() => toggleDrawer(true)}
           color="inherit"
-          sx={{ display: { xs: "flex", lg: "flex" } }}
+          sx={{
+            display: { xs: "flex", lg: "flex" },
+            backgroundColor:
+              params.pathname === "/sessions" ? "#CAA0C3" : "#FFEDFC",
+          }}
         >
-          <LockClock height={54} width={54} fill={"blue"} />
+          <LockClock
+            height={54}
+            width={54}
+            sx={{
+              color: params.pathname === "/sessions" ? "white" : "black",
+            }}
+          />
         </IconButton>
         <IconButton
           size="large"
           aria-haspopup="true"
           onClick={() => toggleDrawer(true)}
           color="inherit"
-          sx={{ display: { xs: "flex", lg: "flex" } }}
+          sx={{
+            display: { xs: "flex", lg: "flex" },
+            backgroundColor:
+              params.pathname === "/doctors" ? "#CAA0C3" : "#FFEDFC",
+          }}
         >
-          <LocalHospital height={54} width={54} fill={"blue"} />
+          <LocalHospital
+            height={54}
+            width={54}
+            sx={{
+              color: params.pathname === "/doctors" ? "white" : "black",
+            }}
+          />
         </IconButton>
         <IconButton
           size="large"
           aria-haspopup="true"
           onClick={() => toggleDrawer(true)}
           color="inherit"
-          sx={{ display: { xs: "flex", lg: "flex" } }}
+          sx={{
+            display: { xs: "flex", lg: "flex" },
+            backgroundColor:
+              params.pathname === "/excercise" ? "#CAA0C3" : "#FFEDFC",
+          }}
         >
-          <Assignment height={54} width={54} fill={"blue"} />
+          <Assignment
+            height={54}
+            width={54}
+            sx={{
+              color: params.pathname === "/excercise" ? "white" : "black",
+            }}
+          />
         </IconButton>
         <IconButton
           size="large"
           aria-haspopup="true"
           onClick={() => toggleDrawer(true)}
           color="inherit"
-          sx={{ display: { xs: "flex", lg: "flex" } }}
+          sx={{
+            display: { xs: "flex", lg: "flex" },
+            backgroundColor:
+              params.pathname === "/profile" ? "#CAA0C3" : "#FFEDFC",
+          }}
         >
-          <Person height={54} width={54} fill={"blue"} />
+          <Person
+            height={54}
+            width={54}
+            sx={{
+              color: params.pathname === "/profile" ? "white" : "black",
+            }}
+          />
         </IconButton>
         <IconButton
           size="large"
           aria-haspopup="true"
           onClick={() => toggleDrawer(true)}
           color="inherit"
-          sx={{ display: { xs: "flex", lg: "flex" } }}
+          sx={{
+            display: { xs: "flex", lg: "flex" },
+            backgroundColor:
+              params.pathname === "/settings" ? "#CAA0C3" : "#FFEDFC",
+          }}
         >
-          <Settings height={54} width={54} fill={"blue"} />
+          <Settings
+            height={54}
+            width={54}
+            sx={{
+              color: params.pathname === "/settings" ? "white" : "black",
+            }}
+          />
         </IconButton>
       </Box>
+
       <Drawer
         anchor={"left"}
         open={isDrawerOpen}
