@@ -1,23 +1,14 @@
 import React, { useState, useEffect } from "react";
-import {
-  Typography,
-  List,
-  ListItem,
-  Container,
-  Button,
-  Box,
-} from "@mui/material";
+import { Typography, List, ListItem, Container, Button } from "@mui/material";
 import ROSLIB from "roslib";
-import Modal from "@mui/material/Modal";
 const Elbow = ({ messages }) => {
   const [connected, setConnected] = useState(false);
   const [ros, setRos] = useState(null);
   const [elbowMessages, setElbowMessages] = useState([]);
   const [countMessages, setCountMessages] = useState([]);
-  const [countMax, setCountMax] = useState(5);
+  const [countMax, setCountMax] = useState(25);
   const [thresholdValue, setThresholdValue] = useState(90);
-  const [open, setOpen] = useState(false);
-  const [goodGoingCount, setGoodGoingCount] = useState(0);
+
   useEffect(() => {
     const initConnection = () => {
       const rosInstance = new ROSLIB.Ros({
@@ -46,9 +37,6 @@ const Elbow = ({ messages }) => {
         }, 3000);
       });
     };
-    if (goodGoingCount === countMax) {
-      alert("ji ");
-    }
 
     const subscribeToElbowTopic = (rosInstance) => {
       if (rosInstance) {
@@ -84,7 +72,6 @@ const Elbow = ({ messages }) => {
           countListener.subscribe((message) => {
             console.log("Received message from /count topic:", message);
             setCountMessages([message.data]);
-            setGoodGoingCount(message.data);
           });
 
           console.log("Subscription to /count topic successful.");
@@ -95,7 +82,6 @@ const Elbow = ({ messages }) => {
         console.error("ROS connection not initialized.");
       }
     };
-
     initConnection();
     return () => {
       if (ros) {
@@ -140,34 +126,24 @@ const Elbow = ({ messages }) => {
       console.error("ROS connection not initialized.");
     }
   };
+  const [goodGoingCount, setGoodGoingCount] = useState(0);
 
   console.log(messages && messages[0], "gu");
 
-  // useEffect(() => {
-  //   if (messages && messages[0] >= 40 && messages[0] <= 70) {
-  //     setGoodGoingCount((prevCount) => prevCount + 1);
-  //   }
-  // }, [messages]);
-  const startactivity = () => {
-    publishCountMessage();
-    publishThresholdMessage();
-  };
-  if (goodGoingCount === countMax) {
-    setOpen(true);
-  }
+  useEffect(() => {
+    if (messages && messages[0] >= 40 && messages[0] <= 70) {
+      setGoodGoingCount((prevCount) => prevCount + 1);
+    }
+  }, [messages]);
+
   return (
     <>
       {elbowMessages && (
         <Container maxWidth="md">
-          <Box display={"flex"} flexDirection={"column"}>
-            <Typography variant="h1" gutterBottom>
-              Elbow Exercise
-            </Typography>
-            <Typography variant="body2" gutterBottom>
-              according to last sessions and data each set is of 25 counts or
-              repitions.
-            </Typography>
-          </Box>
+          <Typography variant="h1" gutterBottom>
+            Elbow Exercise
+          </Typography>
+
           <List>
             {elbowMessages?.map((message, index) => (
               <ListItem key={index}>
@@ -177,32 +153,31 @@ const Elbow = ({ messages }) => {
               </ListItem>
             ))}
           </List>
-
-          <Typography
-            fontFamily={"poppins"}
-            fontSize={"35px"}
-            sx={{ color: "green", fontWeight: "600" }}
-          >
-            {thresholdValue} is the Angle threshold
-          </Typography>
-
+          {elbowMessages[0] >= 40 && elbowMessages[0] <= 70 ? (
+            <Typography
+              fontFamily={"poppins"}
+              fontSize={"35px"}
+              sx={{ color: "green", fontWeight: "600" }}
+            >
+              Good Going
+            </Typography>
+          ) : (
+            <Typography
+              fontFamily={"poppins"}
+              fontSize={"35px"}
+              sx={{ color: "red", fontWeight: "600" }}
+            >
+              Correct Your Angle
+            </Typography>
+          )}
           <Typography fontSize={"35px"} variant="body1">
-            Excersice count : {goodGoingCount}/{countMax}
+            Excersize count : {goodGoingCount}/15
           </Typography>
           <Typography fontSize={"20px"} color={"yellowgreen"}>
-            {goodGoingCount >= countMax ? "Well Done Champ !!" : " "}
+            {goodGoingCount === 15 ? "Well Done Champ !!" : " "}
           </Typography>
-          <Button
-            variant="contained"
-            sx={{
-              boxShadow: "none",
-              padding: "14px 32px",
-              marginTop: "15px",
-            }}
-            onClick={startactivity}
-          >
-            Start Activity
-          </Button>
+          <Button onClick={publishCountMessage}>Publish Count</Button>
+          <Button onClick={publishThresholdMessage}>Publish Count</Button>
         </Container>
       )}
     </>
