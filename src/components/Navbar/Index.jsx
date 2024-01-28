@@ -23,41 +23,6 @@ const Index = () => {
   };
   return (
     <>
-      <SideDrawer
-        openDrawer={openDrawer}
-        setOpenDrawer={() => setOpenDrawer(false)}
-      />
-      <Box
-        display={"flex"}
-        flexDirection={"column"}
-        alignItems={"flex-start"}
-        paddingLeft={"15px"}
-        width={"auto"}
-        paddingBottom={"15px"}
-        sx={{
-          backgroundColor: "#FFEDFC",
-        }}
-      >
-        <Box
-          display={"flex"}
-          gap={"20px"}
-          alignItems={"center"}
-          marginTop={"15px"}
-        >
-          <IconButton
-            size="large"
-            aria-haspopup="true"
-            onClick={() => toggleDrawer(true)}
-            color="inherit"
-            sx={{ display: { xs: "flex", lg: "flex" } }}
-          >
-            <Menu height={54} width={54} fill={"blue"} />
-          </IconButton>
-          <Typography fontSize={"26px"} fontWeight={600}>
-            Physio-Fit
-          </Typography>
-        </Box>
-      </Box>
       <Box
         display={"flex"}
         flexDirection={"column"}
@@ -73,7 +38,6 @@ const Index = () => {
         <IconButton
           size="large"
           aria-haspopup="true"
-          onClick={() => toggleDrawer(true)}
           color="inherit"
           sx={{
             display: { xs: "flex", lg: "flex" },
@@ -91,7 +55,6 @@ const Index = () => {
         <IconButton
           size="large"
           aria-haspopup="true"
-          onClick={() => toggleDrawer(true)}
           color="inherit"
           sx={{
             display: { xs: "flex", lg: "flex" },
@@ -110,7 +73,6 @@ const Index = () => {
         <IconButton
           size="large"
           aria-haspopup="true"
-          onClick={() => toggleDrawer(true)}
           color="inherit"
           sx={{
             display: { xs: "flex", lg: "flex" },
@@ -129,7 +91,6 @@ const Index = () => {
         <IconButton
           size="large"
           aria-haspopup="true"
-          onClick={() => toggleDrawer(true)}
           color="inherit"
           sx={{
             display: { xs: "flex", lg: "flex" },
@@ -148,7 +109,6 @@ const Index = () => {
         <IconButton
           size="large"
           aria-haspopup="true"
-          onClick={() => toggleDrawer(true)}
           color="inherit"
           sx={{
             display: { xs: "flex", lg: "flex" },
@@ -167,7 +127,6 @@ const Index = () => {
         <IconButton
           size="large"
           aria-haspopup="true"
-          onClick={() => toggleDrawer(true)}
           color="inherit"
           sx={{
             display: { xs: "flex", lg: "flex" },
