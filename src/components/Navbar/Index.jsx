@@ -8,6 +8,8 @@ import {
   LocalHospital,
   Person,
   Settings,
+  Explore,
+  ExpandCircleDownSharp,
 } from "@mui/icons-material";
 import { IconButton, Typography } from "@mui/material";
 import { Drawer, Stack, Box } from "@mui/material";
@@ -21,43 +23,52 @@ const Index = () => {
   const toggleDrawer = (open) => {
     setIsDrawerOpen(open);
   };
+  const pushUpsHandler = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/run-script', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      const data = await response.json();
+  
+      if (data.success) {
+        alert('Script executed successfully!');
+      } else {
+        alert(`Error: ${data.error}`);
+      }
+    } catch (error) {
+      console.error('Fetch error:', error);
+      alert('An error occurred while trying to run the script.');
+    }
+  };
+  
+  const curlsHandler=async()=>{
+    try {
+      const response = await fetch('http://localhost:5000/run-curls', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      const data = await response.json();
+  
+      if (data.success) {
+        alert('Script executed successfully!');
+      } else {
+        alert(`Error: ${data.error}`);
+      }
+    } catch (error) {
+      console.error('Fetch error:', error);
+      alert('An error occurred while trying to run the script.');
+    }
+
+  }
   return (
     <>
-      <SideDrawer
-        openDrawer={openDrawer}
-        setOpenDrawer={() => setOpenDrawer(false)}
-      />
-      <Box
-        display={"flex"}
-        flexDirection={"column"}
-        alignItems={"flex-start"}
-        paddingLeft={"15px"}
-        width={"auto"}
-        paddingBottom={"15px"}
-        sx={{
-          backgroundColor: "#FFEDFC",
-        }}
-      >
-        <Box
-          display={"flex"}
-          gap={"20px"}
-          alignItems={"center"}
-          marginTop={"15px"}
-        >
-          <IconButton
-            size="large"
-            aria-haspopup="true"
-            onClick={() => toggleDrawer(true)}
-            color="inherit"
-            sx={{ display: { xs: "flex", lg: "flex" } }}
-          >
-            <Menu height={54} width={54} fill={"blue"} />
-          </IconButton>
-          <Typography fontSize={"26px"} fontWeight={600}>
-            Physio-Fit
-          </Typography>
-        </Box>
-      </Box>
       <Box
         display={"flex"}
         flexDirection={"column"}
@@ -73,7 +84,6 @@ const Index = () => {
         <IconButton
           size="large"
           aria-haspopup="true"
-          onClick={() => toggleDrawer(true)}
           color="inherit"
           sx={{
             display: { xs: "flex", lg: "flex" },
@@ -91,7 +101,6 @@ const Index = () => {
         <IconButton
           size="large"
           aria-haspopup="true"
-          onClick={() => toggleDrawer(true)}
           color="inherit"
           sx={{
             display: { xs: "flex", lg: "flex" },
@@ -110,7 +119,6 @@ const Index = () => {
         <IconButton
           size="large"
           aria-haspopup="true"
-          onClick={() => toggleDrawer(true)}
           color="inherit"
           sx={{
             display: { xs: "flex", lg: "flex" },
@@ -129,7 +137,6 @@ const Index = () => {
         <IconButton
           size="large"
           aria-haspopup="true"
-          onClick={() => toggleDrawer(true)}
           color="inherit"
           sx={{
             display: { xs: "flex", lg: "flex" },
@@ -148,7 +155,6 @@ const Index = () => {
         <IconButton
           size="large"
           aria-haspopup="true"
-          onClick={() => toggleDrawer(true)}
           color="inherit"
           sx={{
             display: { xs: "flex", lg: "flex" },
@@ -165,9 +171,9 @@ const Index = () => {
           />
         </IconButton>
         <IconButton
+        onClick={pushUpsHandler}
           size="large"
           aria-haspopup="true"
-          onClick={() => toggleDrawer(true)}
           color="inherit"
           sx={{
             display: { xs: "flex", lg: "flex" },
@@ -175,7 +181,26 @@ const Index = () => {
               params.pathname === "/settings" ? "#CAA0C3" : "#FFEDFC",
           }}
         >
-          <Settings
+          <Explore
+            height={54}
+            width={54}
+            sx={{
+              color: params.pathname === "/settings" ? "white" : "black",
+            }}
+          />
+        </IconButton>
+        <IconButton
+          size="large"
+          onClick={curlsHandler}
+          aria-haspopup="true"
+          color="inherit"
+          sx={{
+            display: { xs: "flex", lg: "flex" },
+            backgroundColor:
+              params.pathname === "/pushups" ? "#CAA0C3" : "#FFEDFC",
+          }}
+        >
+          <ExpandCircleDownSharp
             height={54}
             width={54}
             sx={{

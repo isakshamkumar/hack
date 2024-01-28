@@ -1,7 +1,12 @@
 import React from "react";
+import OurSessions from "./OurSessions";
 
 const Home = () => {
-  return <></>;
+  return (
+    <>
+      <OurSessions />
+    </>
+  );
 };
 
 export default Home;
