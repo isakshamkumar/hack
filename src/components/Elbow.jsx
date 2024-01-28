@@ -14,7 +14,7 @@ const Elbow = ({ messages }) => {
   const [ros, setRos] = useState(null);
   const [elbowMessages, setElbowMessages] = useState([]);
   const [countMessages, setCountMessages] = useState([]);
-  const [countMax, setCountMax] = useState(5);
+  const [countMax, setCountMax] = useState(15);
   const [thresholdValue, setThresholdValue] = useState(90);
   const [open, setOpen] = useState(false);
   const [goodGoingCount, setGoodGoingCount] = useState(0);
@@ -46,9 +46,6 @@ const Elbow = ({ messages }) => {
         }, 3000);
       });
     };
-    if (goodGoingCount === countMax) {
-      alert("ji ");
-    }
 
     const subscribeToElbowTopic = (rosInstance) => {
       if (rosInstance) {
@@ -189,9 +186,7 @@ const Elbow = ({ messages }) => {
           <Typography fontSize={"35px"} variant="body1">
             Excersice count : {goodGoingCount}/{countMax}
           </Typography>
-          <Typography fontSize={"20px"} color={"yellowgreen"}>
-            {goodGoingCount >= countMax ? "Well Done Champ !!" : " "}
-          </Typography>
+
           <Button
             variant="contained"
             sx={{

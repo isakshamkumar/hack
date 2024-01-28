@@ -25,48 +25,47 @@ const Index = () => {
   };
   const pushUpsHandler = async () => {
     try {
-      const response = await fetch('http://localhost:5000/run-script', {
-        method: 'POST',
+      const response = await fetch("http://localhost:5000/run-script", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
-  
+
       const data = await response.json();
-  
+
       if (data.success) {
-        alert('Script executed successfully!');
+        alert("Script executed successfully!");
       } else {
         alert(`Error: ${data.error}`);
       }
     } catch (error) {
-      console.error('Fetch error:', error);
-      alert('An error occurred while trying to run the script.');
+      console.error("Fetch error:", error);
+      alert("An error occurred while trying to run the script.");
     }
   };
-  
-  const curlsHandler=async()=>{
+
+  const curlsHandler = async () => {
     try {
-      const response = await fetch('http://localhost:5000/run-curls', {
-        method: 'POST',
+      const response = await fetch("http://localhost:5000/run-curls", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
-  
+
       const data = await response.json();
-  
+
       if (data.success) {
-        alert('Script executed successfully!');
+        alert("Script executed successfully!");
       } else {
         alert(`Error: ${data.error}`);
       }
     } catch (error) {
-      console.error('Fetch error:', error);
-      alert('An error occurred while trying to run the script.');
+      console.error("Fetch error:", error);
+      alert("An error occurred while trying to run the script.");
     }
-
-  }
+  };
   return (
     <>
       <Box
@@ -138,6 +137,7 @@ const Index = () => {
           size="large"
           aria-haspopup="true"
           color="inherit"
+          onClick={() => window.location("/connection")}
           sx={{
             display: { xs: "flex", lg: "flex" },
             backgroundColor:
@@ -171,7 +171,7 @@ const Index = () => {
           />
         </IconButton>
         <IconButton
-        onClick={pushUpsHandler}
+          onClick={pushUpsHandler}
           size="large"
           aria-haspopup="true"
           color="inherit"
