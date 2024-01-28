@@ -141,14 +141,14 @@ const Index = () => {
           sx={{
             display: { xs: "flex", lg: "flex" },
             backgroundColor:
-              params.pathname === "/excercise" ? "#CAA0C3" : "#FFEDFC",
+              params.pathname === "/connection" ? "#CAA0C3" : "#FFEDFC",
           }}
         >
           <Assignment
             height={54}
             width={54}
             sx={{
-              color: params.pathname === "/excercise" ? "white" : "black",
+              color: params.pathname === "/connection" ? "white" : "black",
             }}
           />
         </IconButton>
